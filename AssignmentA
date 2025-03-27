@@ -2,7 +2,7 @@ import socket
 
 # Define the server's IP and port number
 SERVER_IP = '10.0.0.97'  # Localhost for testing
-SERVER_PORT = 50000  # Choose a port > 40000
+SERVER_PORT = 60000  # Choose a port > 40000
 
 def main():
     # Create a socket object

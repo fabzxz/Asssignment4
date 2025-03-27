@@ -1,0 +1,30 @@
+import socket
+
+# Define the server's IP and port number
+SERVER_IP = '10.0.0.97'  # Localhost for testing
+SERVER_PORT = 50000  # Choose a port > 40000
+
+def main():
+    # Create a socket object
+    client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    
+    try:
+        # Connect to the server
+        client_socket.connect((SERVER_IP, SERVER_PORT))
+        
+        # Get input from the user
+        message = input("Enter a string to send to the server: ")
+        
+        # Send the message to the server
+        client_socket.sendall(message.encode())
+        
+        # Receive the response from the server
+        response = client_socket.recv(1024).decode()
+        print(f"Received from server: {response}")
+        
+    finally:
+        # Close the connection
+        client_socket.close()
+
+if __name__ == "__main__":
+    main()

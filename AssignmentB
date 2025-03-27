@@ -1,0 +1,34 @@
+import socket
+
+# Define the IP and port number to listen on
+SERVER_IP = '10.0.0.97'  # Localhost
+SERVER_PORT = 50000  # Choose a port > 40000
+
+def main():
+    # Create a socket object
+    server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    
+    # Bind the socket to the address and port
+    server_socket.bind((SERVER_IP, SERVER_PORT))
+    
+    # Listen for incoming connections
+    server_socket.listen(1)
+    print("Server is listening for connections...")
+    
+    # Accept the incoming connection
+    conn, addr = server_socket.accept()
+    print(f"Connection established with {addr}")
+    
+    with conn:
+        # Receive data from Program A (client)
+        data = conn.recv(1024).decode()
+        print(f"Received from client: {data}")
+        
+        # Convert the string to uppercase
+        uppercase_data = data.upper()
+        
+        # Send the uppercase string back to Program A
+        conn.sendall(uppercase_data.encode())
+
+if __name__ == "__main__":
+    main()
